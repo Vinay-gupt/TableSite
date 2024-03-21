@@ -16,14 +16,14 @@ const Form = ({ShowForm,setShowForm,Id,setId,setData,setTotalPages,data1}) => {
         const newData={...data,id:Id}
         setId(Id+1)
         const res= await axios.post(`${import.meta.env.VITE_BACKEND_URL}/register`,newData)
-        // console.log(data1);
         if(res.data.success){
         setData(prev => [...prev,res.data.data])
         setTotalPages(Math.ceil(((data1.length+1) / 10)))
+        window.location.reload();
+
     }
         setShowForm(!ShowForm)
         
-        // console.log(data)}
       }
     return (
         <>

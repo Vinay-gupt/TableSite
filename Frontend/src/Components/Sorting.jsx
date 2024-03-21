@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 
-const Sorting = ({ Sort, setSort, setData, data }) => {
+const Sorting = ({ Sort, setSort, setData, data, ShowForm }) => {
     const [Toogle, setToogle] = useState(true)
     const initialState = {
         id: false,
@@ -16,14 +16,11 @@ const Sorting = ({ Sort, setSort, setData, data }) => {
     const [Selected, setSelected] = useState(null)
 
     useEffect(() => {
-        console.log(Sort,"yeh mera real sort");
         if (Sort.name) {
-            console.log(data.sort((a, b) => a.name.localeCompare(b.name)));
             setData(prev => data.sort((a, b) => a.name.localeCompare(b.name)))
             
         }
        else if (Sort.id) {
-            console.log("me aa gaya ");
             setData(data.sort((a, b) => a.id - b.id))
             
         }
@@ -37,7 +34,6 @@ const Sorting = ({ Sort, setSort, setData, data }) => {
 
     
     const handleCheckboxChange = (e, field, ind) => {
-        console.log(e.target.checked,"chekced box")
         if (e.target.checked) {
             setSort(prev=>initialState)
             setSort(prevFields => ({
@@ -61,10 +57,10 @@ const Sorting = ({ Sort, setSort, setData, data }) => {
     }
     return (
         <>
-            <div className=" SortingSwitch absolute" onClick={HandleToggle} >Sorting</div>
+            <div className=" SortingSwitch absolute top-1 right-1" onClick={HandleToggle} style={{filter:ShowForm?"blur(4px)":""}} >Sorting</div>
             <div className={`sidebar absolute top-0 left-0 z-10 ${!Toogle ? 'open' : ''}`} >
                 <h2>Data Fields</h2>
-                <div className="checkboxes">
+                <div className="checkboxes flex justify-center items-baseline">
                     {Object.entries(Sort).map(([key, value], ind) => (
 
                         <div key={key} className="checkbox text-center">
